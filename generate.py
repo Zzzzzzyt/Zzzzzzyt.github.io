@@ -136,6 +136,9 @@ def main():
     global domain
     global environment
     if len(sys.argv) > 1:
+        if sys.argv[1]=='cleanup':
+            cleanup()
+            return
         domain = sys.argv[1]
     environment = {
         'domain': domain,

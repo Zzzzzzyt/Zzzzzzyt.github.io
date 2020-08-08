@@ -6,8 +6,8 @@
 	--maz-bg: #080800;
 	--maz-bg-gray: #999;
 	--maz-code-bg: #23241f;
-	--maz-text: #eee;
-	--maz-text-gray: #aaa;
+	--maz-text: #ddd;
+	--maz-text-gray: #999;
 	--maz-text-dark: #666;
 }
 
@@ -121,7 +121,12 @@ samp:empty {
 .index-card {
 	border-color: var(--maz-text);
 	background: transparent;
+	border: none;
 	margin: 8px;
+}
+
+.index-card .card-body{
+	padding: 8px;
 }
 
 .index-card .card-header:first-child {
