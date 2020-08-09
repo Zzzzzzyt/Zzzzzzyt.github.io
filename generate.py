@@ -2,7 +2,8 @@ import os
 import sys
 import datetime
 
-domain = 'http://127.0.0.1:5500'
+domain = 'http://127.0.0.1:5500/_local'
+outputRoot = './_local'
 environment = {}
 templates = {}
 
@@ -10,6 +11,13 @@ templates = {}
 def changeExtension(filename, ext):
     pos = filename.rindex('.')
     return filename[:pos]+ext
+
+
+def safeWrite(path, data):
+    pos = path.rindex('/')
+    os.makedirs(path[:pos+1], exist_ok=True)
+    print('write: ', path)
+    open(path, 'w', encoding='utf-8').write(data)
 
 
 def cleanup():
@@ -74,10 +82,11 @@ def genArticle(path, title, description):
         'description': description
     })
     html = genTemplate('<!--template:article-->', args)
-    open('.'+changeExtension(path, '.html'), 'w', encoding='utf-8').write(html)
+    safeWrite(outputRoot+changeExtension(path, '.html'), html)
 
 
 def genIndex(path, dirs, articles):
+    print('generate: index', path)
     index = ''
     for d in dirs:
         args = environment.copy()
@@ -86,6 +95,8 @@ def genIndex(path, dirs, articles):
             'dir': d[0]+d[1]
         })
         index += genTemplate('<!--template:indexDirectory-->', args)
+    if len(dirs) > 0:
+        index += '<hr/>'
     for a in articles:
         args = environment.copy()
         args.update({
@@ -104,7 +115,7 @@ def genIndex(path, dirs, articles):
         'generateIndex': index
     })
     html = genTemplate('<!--template:index-->', args)
-    open('.'+path+'index.html', 'w', encoding='utf-8').write(html)
+    safeWrite(outputRoot+path+'index.html', html)
 
 
 def gen(path):
@@ -113,6 +124,8 @@ def gen(path):
     articles = []
     for filename in l:
         if filename.startswith('_template'):
+            continue
+        if filename.startswith('_local'):
             continue
         if filename.startswith('assets'):
             continue
@@ -135,22 +148,27 @@ def gen(path):
 def main():
     global domain
     global environment
+    global outputRoot
     if len(sys.argv) > 1:
-        if sys.argv[1]=='cleanup':
+        outputRoot = '.'
+        if sys.argv[1] == 'cleanup':
             cleanup()
             return
-        domain = sys.argv[1]
+        elif sys.argv[1] == 'remote':
+            domain = 'https://zzzzzzyt.github.io'
+        else:
+            domain = sys.argv[1]
     environment = {
         'domain': domain,
         'generateTime': str(datetime.datetime.utcnow())+' UTC'
     }
     print(' Environment '.center(60, '='))
+    print('outputRoot:', outputRoot)
     print(environment)
     print(''.center(60, '='))
-    cleanup()
+    # cleanup()
     readTemplates()
     gen('/')
-
 
 if __name__ == '__main__':
     main()
