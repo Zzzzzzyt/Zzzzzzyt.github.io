@@ -114,18 +114,12 @@ $$
 
 ### Picture
 
-![hhsoj](assets/img/hhsoj_ct_128x.png)
-
-![hhsoj](assets/img/anchor.svg)
-
 ![pic](data:image/gif;base64,R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs=)
 
 ### Audio
 
 #### Raw Audio Link
 ![Reimu](https://upload.thwiki.cc/b/b5/th15_01.mp3)
-
-![FakeReimu](https://upload.thwiki.cc/b/b5/th15_01.mp2)
 
 <!--
 ### Invisible! This is html comment.
