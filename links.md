@@ -12,4 +12,4 @@ HHS Project Page: [https://project.hellholestudios.top/](https://project.hellhol
 HHS Github organization: [@HellHoleStudios](https://www.github.com/orgs/HellHoleStudios/)  
 
 ## Other
-My Minecraft handle: [Zzzyt](https://namemc.com/profile/Zzzyt.1)  
+My Minecraft handle: [Zzzyt](https://mine.ly/Zzzyt.1)  
