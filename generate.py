@@ -61,25 +61,25 @@ def genTemplate(html, args):
 
 def parseArticle(path, filename):
     lines = open('.'+path+filename, encoding='utf-8').readlines()
-    title = filename
-    description = ''
+    info = {
+        'title': filename,
+        'description': '',
+        'priority': 0
+    }
     for l in lines:
-        if l.startswith('<!--title:'):
-            pos = l.find(':')
-            title = l.strip()[pos+1:-3].strip()
-        if l.startswith('<!--description:'):
-            pos = l.find(':')
-            description = l.strip()[pos+1:-3].strip()
-    return path+filename, title, description
+        for i in info:
+            if l.startswith('<!--{}:'.format(i)):
+                pos = l.find(':')
+                info[i] = l.strip()[pos+1:-3].strip()
+    return path+filename, info
 
 
-def genArticle(path, title, description):
+def genArticle(path, info):
     print('generate: article', path)
     args = environment.copy()
+    args.update(info)
     args.update({
-        'markdownSrc': path,
-        'title': title,
-        'description': description
+        'markdownSrc': path
     })
     html = genTemplate('<!--template:article-->', args)
     safeWrite(outputRoot+changeExtension(path, '.html'), html)
@@ -88,21 +88,32 @@ def genArticle(path, title, description):
 def genIndex(path, dirs, articles):
     print('generate: index', path)
     index = ''
+    cnt = 0
     for d in dirs:
+        if cnt % 3 == 0:
+            index += '<div class="row">'
         args = environment.copy()
         args.update({
             'path': d[0],
-            'dir': d[0]+d[1]
+            'dir': d[1]
         })
         index += genTemplate('<!--template:indexDirectory-->', args)
+        if cnt % 3 == 2:
+            index += '</div>'
+        cnt += 1
+    if cnt % 3 != 0:
+        index += '</div>'
+
     if len(dirs) > 0:
         index += '<hr/>'
+
+    articles.sort(key=lambda a: a[1]['priority'], reverse=True)
     for a in articles:
         args = environment.copy()
         args.update({
             'path': changeExtension(a[0], '.html'),
-            'title': a[1],
-            'description': a[2]
+            'title': a[1]['title'],
+            'description': a[1]['description']
         })
         index += genTemplate('<!--template:indexArticle-->', args)
     args = environment.copy()
@@ -120,6 +131,7 @@ def genIndex(path, dirs, articles):
 
 def gen(path):
     l = os.listdir('.'+path)
+    print('gen: at path:', path, l)
     dirs = []
     articles = []
     for filename in l:
@@ -131,15 +143,15 @@ def gen(path):
             continue
         if filename.startswith('.git'):
             continue
-        if os.path.isdir(filename):
+        if os.path.isdir('.'+path+filename):
             dirs.append((path, filename))
         else:
             if filename == 'README.md':
                 continue
             if filename.endswith('.md'):
                 articles.append(parseArticle(path, filename))
-    for p, title, description in articles:
-        genArticle(p, title, description)
+    for p, info in articles:
+        genArticle(p, info)
     genIndex(path, dirs, articles)
     for d in dirs:
         gen(path+d[1]+'/')
@@ -169,6 +181,7 @@ def main():
     # cleanup()
     readTemplates()
     gen('/')
+
 
 if __name__ == '__main__':
     main()
