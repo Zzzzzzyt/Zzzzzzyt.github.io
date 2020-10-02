@@ -2,9 +2,9 @@
 <!--description: Come and see us!-->
 <!--priority: _-->
 
-My Githubprofile : [@Zzzzzzyt](https://www.github.com/Zzzzzzyt)  
+My Github profile : [@Zzzzzzyt](https://www.github.com/Zzzzzzyt)  
 My e-mail: [zzzyt205@gmail.com](mailto:zzzyt205@gmail.com)  
-My blog: [zzzzzzyt.github.com](https://zzzzzzyt.github.io)  
+My blog: [zzzzzzyt.github.io](https://zzzzzzyt.github.io)  
 My itch.io profile: [zzzyt.itch.io](https://zzzyt.itch.io/)  
 
 HHS blog: [https://blog.hellholestudios.top/](https://blog.hellholestudios.top/)  
