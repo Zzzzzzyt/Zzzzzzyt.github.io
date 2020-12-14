@@ -44,8 +44,8 @@ def readTemplates():
 
 def genTemplate(html, args):
     for inf in range(100):
+        flag = True
         for i in templates:
-            flag = True
             key = '<!--template:{}-->'.format(i)
             if html.find(key) != -1:
                 flag = False
