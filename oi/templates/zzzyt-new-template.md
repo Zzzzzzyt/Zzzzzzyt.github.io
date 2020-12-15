@@ -9,7 +9,7 @@ Code by Zzzyt
 Problem: 
 Algorithm: 
 Status: 
-Date: 20201212
+Date: 
 Version: 1
 */
 
@@ -34,7 +34,6 @@ Version: 1
 
 using namespace std;
 
-#define INF 1000000007
 #define popc(x) __builtin_popcount(x)
 #define over(x)        \
     {                  \
@@ -44,8 +43,8 @@ using namespace std;
     }
 #define all(x) x.begin(), x.end()
 #define ceil(a, b) ((a - 1) / b + 1)
-#define srand() srand(time(0));
-#define srandx() mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
+#define srand() srand(time(0))
+#define srandx() mt19937 rng(chrono::steady_clock::now().time_since_epoch().count())
 #define randx(l, r) uniform_int_distribution<int>(l, r)(rng)
 #define pii pair<int, int>
 #define nosync ios::sync_with_stdio(0)
@@ -86,13 +85,15 @@ ostream &operator<<(ostream &os, const vector<T> &vt) {
 
 /* -------- End of Template -------- */
 
+#define INF 1000000007
+
 int main(int argc, char *argv[]) {
     cin.tie(0);
 #ifndef ZZZYT
     // freopen(".in", "r", stdin);
     // freopen(".out", "w", stdout);
 #endif
-
+    
     return 0;
 }
 ```
