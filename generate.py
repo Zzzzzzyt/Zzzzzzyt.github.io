@@ -55,7 +55,10 @@ def genTemplate(html, args):
         if inf == 99:
             print('WARNING: Infinite recurvise template detected!')
     for i in args:
-        html = html.replace('<!--{}-->'.format(i), args[i])
+        tmp = args[i]
+        if tmp == None:
+            tmp = ''
+        html = html.replace('<!--{}-->'.format(i), tmp)
     return html
 
 
@@ -64,13 +67,16 @@ def parseArticle(path, filename):
     info = {
         'title': filename,
         'description': '',
-        'priority': 0
+        'creationDate': None,
+        'priority': None
     }
     for l in lines:
         for i in info:
             if l.startswith('<!--{}:'.format(i)):
                 pos = l.find(':')
                 info[i] = l.strip()[pos+1:-3].strip()
+    if info['priority'] == None:
+        info['priority'] = info['creationDate']
     return path+filename, info
 
 
@@ -113,6 +119,7 @@ def genIndex(path, dirs, articles):
         args.update({
             'path': changeExtension(a[0], '.html'),
             'title': a[1]['title'],
+            'creationDate': a[1]['creationDate'],
             'description': a[1]['description']
         })
         index += genTemplate('<!--template:indexArticle-->', args)

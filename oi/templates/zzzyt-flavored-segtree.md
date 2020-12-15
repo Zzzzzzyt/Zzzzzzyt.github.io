@@ -1,6 +1,6 @@
 <!--title: Zzzyt Flavored Segment Tree-->
 <!--description: A weird power-of-two implmentation of the segment tree.-->
-<!--priority: 20200810-->
+<!--creationDate: 20200810-->
 
 This one is range sum, range add version.
 

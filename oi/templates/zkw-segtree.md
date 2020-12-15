@@ -1,6 +1,6 @@
 <!--title: ZKW SegTree-->
 <!--description: <del>I love ZKW</del>-->
-<!--priority: 20201214-->
+<!--creationDate: 20201214-->
 
 [Submit here](https://judge.yosupo.jp/problem/point_add_range_sum)
 
