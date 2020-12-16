@@ -3,7 +3,9 @@
 <!--creationDate: 20201215-->
 
 # Input
-**TODO**
+The machine has 3 states and a tape length of 32 bits.  
+The tape is encoded in binary in the variable $B$, where position 0 is the lowest bit.  
+The transition function is stored in $A$, in the following format:  
 
 # Program
 $\text{transition function} \rightarrow A$  
