@@ -6,6 +6,19 @@
 The machine has 3 states and a tape length of 32 bits.  
 The tape is encoded in binary in the variable $B$, where position 0 is the lowest bit.  
 The transition function is stored in $A$, in the following format:  
+- Define `OUTPUT` as a 4-bit block consisting of `[next_state(2 bits)][movement direction(1 bit)][number to write(1 bit)]` where:
+  - $\text{next_state} \in [0,3]$, jumping to state 3 will halt the machine.
+  - $\text{movement} \in [0,1]$, where 0 decreses R/W head position by one and 1 increases it by one.
+  - $\text{number_to_write} \in [0,1]$, the number to write to the tape (before movement)
+- $A$ consists of 6 blocks of `OUTPUT`, resembling the outcome of the following scenario (from low bit to high):
+  - At state 0, now reads 0
+  - At state 0, now reads 1
+  - At state 1, now reads 0
+  - At state 1, now reads 1
+  - At state 2, now reads 0
+  - At state 2, now reads 1
+
+The machine will first write, then move, then possibly halt.
 
 # Program
 $\text{transition function} \rightarrow A$  
@@ -40,4 +53,4 @@ $A=35$, $C=0$, $D=0$
 Flip all bits.
 
 # Compatibility
-**TODO**
+By replacing all "$\div R$"s with the "$Rnd()$" function and setting rounding to Fixed 0, this code should also work on fx-991ES or even fx-82ES.
