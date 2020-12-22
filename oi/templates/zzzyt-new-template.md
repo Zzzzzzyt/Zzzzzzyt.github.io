@@ -89,9 +89,9 @@ ostream &operator<<(ostream &os, const vector<T> &vt) {
 
 int main(int argc, char *argv[]) {
     cin.tie(0);
+    //freopen(".in", "r", stdin);
 #ifndef ZZZYT
-    // freopen(".in", "r", stdin);
-    // freopen(".out", "w", stdout);
+    //freopen(".out", "w", stdout);
 #endif
     
     return 0;
