@@ -174,7 +174,7 @@ def main():
             cleanup()
             return
         elif sys.argv[1] == 'remote':
-            domain = 'https://zzzzzzyt.github.io'
+            domain = 'https://z.ys.al'
         else:
             domain = sys.argv[1]
     environment = {
