@@ -19,7 +19,7 @@ I have no idea what I'm writing.
 # About myself
 I usually appear online under the name _Zzzyt_. It's a completely artificial word with no meaning, and I never knew how to pronounce it. My user IDs and other links are in the [Links&Credits](links.html) page.
 
-I'm a member of [HellHolsStudios](https://blog.hellholestudios.top/). Never mind its name, that's just a Tell Tale Game parody.
+I'm a member of [Hell Hole Studios](https://blog.hellholestudios.top/). Never mind its name, that's just a Tell Tale Game parody.
 
 I've explored many areas of programming, including:
 - competitive programming ~~(as a career)~~
