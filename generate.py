@@ -1,5 +1,6 @@
 import os
 import sys
+import json
 import datetime
 
 domain = 'http://127.0.0.1:5500/_local'
@@ -18,6 +19,10 @@ def safeWrite(path, data):
     os.makedirs(path[:pos+1], exist_ok=True)
     print('write: ', path)
     open(path, 'w', encoding='utf-8').write(data)
+
+
+def safeJSON(obj):
+    return json.dumps(obj).replace("'", "&apos;")
 
 
 def cleanup():
@@ -62,13 +67,14 @@ def genTemplate(html, args):
     return html
 
 
-def parseArticle(path, filename):
+def parseArticle(path, filename, lang):
     lines = open('.'+path+filename, encoding='utf-8').readlines()
     info = {
         'title': filename,
         'description': '',
         'creationDate': None,
-        'priority': None
+        'priority': None,
+        'lang': lang
     }
     for l in lines:
         for i in info:
@@ -80,15 +86,38 @@ def parseArticle(path, filename):
     return path+filename, info
 
 
-def genArticle(path, info):
-    print('generate: article', path)
+def genArticle(name, info):
+    print('generate: article', name)
     args = environment.copy()
-    args.update(info)
     args.update({
-        'markdownSrc': path
+        'creationDate': info['creationDate'],
+        'titles': safeJSON(info['titles']),
+        'srcs': safeJSON(info['srcs'])
     })
     html = genTemplate('<!--template:article-->', args)
-    safeWrite(outputRoot+changeExtension(path, '.html'), html)
+    safeWrite(outputRoot+name+'.html', html)
+
+
+def aggregateArticle(versions):
+    ret = {
+        'creationDate': '99999999',
+        'priority': ''
+    }
+    srcs = {}
+    titles = {}
+    descriptions = {}
+    for path, info in versions:
+        ret['creationDate'] = min(ret['creationDate'], info['creationDate'])
+        ret['priority'] = max(ret['priority'], info['priority'])
+        srcs[info['lang']] = path
+        titles[info['lang']] = info['title']
+        descriptions[info['lang']] = info['description']
+    ret.update({
+        'srcs': srcs,
+        'titles': titles,
+        'descriptions': descriptions
+    })
+    return ret
 
 
 def genIndex(path, articles):
@@ -98,10 +127,10 @@ def genIndex(path, articles):
     for a in articles:
         args = environment.copy()
         args.update({
-            'path': changeExtension(a[0], '.html'),
-            'title': a[1]['title'],
-            'creationDate': a[1]['creationDate'],
-            'description': a[1]['description']
+            'path': a[0]+'.html',
+            'titles': safeJSON(a[1]['titles']),
+            'descriptions': safeJSON(a[1]['descriptions']),
+            'creationDate': a[1]['creationDate']
         })
         index += genTemplate('<!--template:indexArticle-->', args)
     args = environment.copy()
@@ -109,7 +138,7 @@ def genIndex(path, articles):
     if path2 == '/':
         path2 = "Zzzyt's Blog"
     args.update({
-        'title': "Zzzyt's Blog: "+path,
+        'titles': safeJSON({"en": "Zzzyt's Blog: "+path}),
         'dir': path2,
         'generateIndex': index
     })
@@ -121,15 +150,13 @@ def gen(path):
     l = os.listdir('.'+path)
     print('gen: at path:', path, l)
     dirs = []
-    articles = []
+    articles = {}
     for filename in l:
-        if filename.startswith('_template'):
-            continue
-        if filename.startswith('_local'):
+        if filename.startswith('_'):
             continue
         if filename.startswith('assets'):
             continue
-        if filename.startswith('.git'):
+        if filename.startswith('.'):
             continue
         if os.path.isdir('.'+path+filename):
             dirs.append((path, filename))
@@ -137,13 +164,19 @@ def gen(path):
             if filename == 'README.md':
                 continue
             if filename.endswith('.md'):
-                articles.append(parseArticle(path, filename))
-    for p, info in articles:
-        genArticle(p, info)
+                name, lang = filename.split('.')[0].split('_')
+                name = path+name
+                if not name in articles:
+                    articles[name] = []
+                articles[name].append(parseArticle(path, filename, lang))
+    for name in articles:
+        articles[name] = aggregateArticle(articles[name])
+        genArticle(name, articles[name])
+    articleList = list(articles.keys())
     for d in dirs:
-        articles.extend(gen(path+d[1]+'/'))
-    genIndex(path, articles)
-    return articles
+        articleList.extend(gen(path+d[1]+'/'))
+    genIndex(path, list(articles.items()))
+    return articleList
 
 
 def main():

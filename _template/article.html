@@ -1,17 +1,22 @@
 <html>
 <!--template:head-->
+
 <body>
-<!--template:navbar-->
+	<!--template:navbar-->
 	<div class="container">
-		<span class="title-right"><i><!--creationDate--></i><br/><a href="javascript:history.back(0);">Back</a></span>
-		<h1><b><!--title--></b></h1>
-		<hr/>
-		<div id="content" data-src="<!--markdownSrc-->">
+		<span class="title-right"><i>
+				<!--creationDate-->
+			</i><br /><a href="javascript:history.back(0);">Back</a></span>
+		<h1><b class='lang-expand' data='<!--titles-->'></b></h1>
+		<hr />
+		<div id="content">
 		</div>
 	</div>
 	<script>
-	reloadMarkdown();
+		var srcs = JSON.parse('<!--srcs-->');
+		reloadMarkdown();
 	</script>
-<!--template:footer-->
+	<!--template:footer-->
 </body>
+
 </html>
