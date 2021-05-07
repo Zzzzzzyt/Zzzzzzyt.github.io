@@ -4,6 +4,7 @@
 <!--priority:__-->
 
 # About this site
+
 Just a minimal blog, mostly for keeping ideas and weird stuff.
 Hosted on github at [Zzzzzzyt/Zzzzzzyt.github.io](https://github.com/Zzzzzzyt/Zzzzzzyt.github.io)
 
@@ -17,11 +18,13 @@ This site might cover software development, competitive programming, physics, ma
 I have no idea what I'm writing.
 
 # About myself
+
 I usually appear online under the name _Zzzyt_. It's a completely artificial word with no meaning, and I never knew how to pronounce it. My user IDs and other links are in the [Links&Credits](links.html) page.
 
 I'm a member of [Hell Hole Studios](https://blog.hellholestudios.top/). Never mind its name, that's just a Tell Tale Game parody.
 
 I've explored many areas of programming, including:
+
 - competitive programming ~~(as a career)~~
 - games (mostly in java)
 - java web (using Tomcat)

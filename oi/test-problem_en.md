@@ -65,11 +65,13 @@ int main(){
 ### Sample
 
 #### Sample #1
+
 ```in
 1 2 3
 2 3 4
 3 4 5
 ```
+
 ```out
 YES
 YES
@@ -77,13 +79,15 @@ NO
 ```
 
 #### Sample #2
+
 ```in
 print("Don't format me!");
 return 0;
 ```
+
 ```out
 function(a){
-	document.write("Don't format me too!");
+    document.write("Don't format me too!");
 }
 ```
 

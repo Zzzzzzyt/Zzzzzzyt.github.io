@@ -2,6 +2,8 @@
 <!--description: A weird power-of-two implmentation of the segment tree.-->
 <!--creationDate: 20200810-->
 
+# Code
+
 This one is range sum, range add version.
 
 ```cpp

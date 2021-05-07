@@ -2,6 +2,8 @@
 <!--description: <del>I love ZKW</del>-->
 <!--creationDate: 20201214-->
 
+# Code
+
 [Submit here](https://judge.yosupo.jp/problem/point_add_range_sum)
 
 ```cpp
