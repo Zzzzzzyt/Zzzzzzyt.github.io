@@ -172,10 +172,11 @@ def gen(path):
     for name in articles:
         articles[name] = aggregateArticle(articles[name])
         genArticle(name, articles[name])
-    articleList = list(articles.keys())
+    articleList = list(articles.items())
     for d in dirs:
         articleList.extend(gen(path+d[1]+'/'))
-    genIndex(path, list(articles.items()))
+    print(articleList)
+    genIndex(path, articleList)
     return articleList
 
 

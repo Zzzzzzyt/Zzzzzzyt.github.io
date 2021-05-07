@@ -128,6 +128,6 @@ if (!supportedLangs.has(lang)) {
 window.addEventListener('DOMContentLoaded', (event) => {
 	$(".lang-expand").each(function () {
 		const data = JSON.parse($(this).attr("data"));
-		$(this).text(expandLang(data));
+		$(this).html(expandLang(data));
 	});
 });
