@@ -91,28 +91,9 @@ def genArticle(path, info):
     safeWrite(outputRoot+changeExtension(path, '.html'), html)
 
 
-def genIndex(path, dirs, articles):
+def genIndex(path, articles):
     print('generate: index', path)
     index = ''
-    cnt = 0
-    for d in dirs:
-        if cnt % 3 == 0:
-            index += '<div class="row">'
-        args = environment.copy()
-        args.update({
-            'path': d[0],
-            'dir': d[1]
-        })
-        index += genTemplate('<!--template:indexDirectory-->', args)
-        if cnt % 3 == 2:
-            index += '</div>'
-        cnt += 1
-    if cnt % 3 != 0:
-        index += '</div>'
-
-    if len(dirs) > 0:
-        index += '<hr/>'
-
     articles.sort(key=lambda a: a[1]['priority'], reverse=True)
     for a in articles:
         args = environment.copy()
@@ -159,9 +140,10 @@ def gen(path):
                 articles.append(parseArticle(path, filename))
     for p, info in articles:
         genArticle(p, info)
-    genIndex(path, dirs, articles)
     for d in dirs:
-        gen(path+d[1]+'/')
+        articles.extend(gen(path+d[1]+'/'))
+    genIndex(path, articles)
+    return articles
 
 
 def main():
