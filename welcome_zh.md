@@ -5,41 +5,36 @@
 
 # 关于本站
 
-Just a minimal blog, mostly for keeping ideas and weird stuff.
-Hosted on github at [Zzzzzzyt/Zzzzzzyt.github.io](https://github.com/Zzzzzzyt/Zzzzzzyt.github.io)
+本站设计上极度简洁~~简陋~~，主要是用来记录某些想法和其他奇怪的东西（
+目前用GitHub Pages挂在[Zzzzzzyt/Zzzzzzyt.github.io](https://github.com/Zzzzzzyt/Zzzzzzyt.github.io)
 
-You might complain about its strange design, like some sort of raw html site in the 90s.
-So yes, this site is extremely **un**-powerful, by design, as I gave up Hexo for more flexibility and complete control over the generation process.
-Maybe I'm just reinventing the wheel, but whatever, it's great fun!
+读者可能指出本站设计上的的奇怪之处，比如说长得不够“现代”而有一种90年代的感觉（至少我是这样想的）。这确然是一种相当原始的设计，因为我主动放弃了Hexo而自己拿Python瞎写了一套生成器。  
+俺就是要复造轮子，你管得着么（（（  
+千万不要读`generate.py`，实在太丑了。
 
-Don't read `generate.py` if you are a professional. You might find it disgusting.
+本站包含软件开发，OI，物理，数学，奇技淫巧，等等。我也不知道我要写啥。
 
-This site might cover software development, competitive programming, physics, math, strange ideas and tricks, and many other bizzare content.
-I have no idea what I'm writing.
+# 关于笔者
 
-# About myself
+我的用户名一般都是_Zzzyt_。这个词完全是生造的，根本没法发音。其他的链接什么的都列在[Links&Credits](links.html)里面了。
 
-I usually appear online under the name _Zzzyt_. It's a completely artificial word with no meaning, and I never knew how to pronounce it. My user IDs and other links are in the [Links&Credits](links.html) page.
+我是[Hell Hole Studios](https://blog.hellholestudios.top/)的一员。这个名字显然也是瞎起的。
 
-I'm a member of [Hell Hole Studios](https://blog.hellholestudios.top/). Never mind its name, that's just a Tell Tale Game parody.
+我的本职工作大概算是程序员，探索过的领域比较多：
 
-I've explored many areas of programming, including:
+- OI ~~（老本行）~~
+- 游戏开发（大多是Java）
+- Java web（tomcat）
+- 前端设计
+- 物理模拟
+- 某些工具
+- 一点点机器学习
 
-- competitive programming ~~(as a career)~~
-- games (mostly in java)
-- java web (using Tomcat)
-- general frontend design
-- physics simulation
-- tiny but useful tools
-- a bit of machine learning
+当前我以Java为第一语言，用于大型项目。Python仅作脚本只用。现在正在学NodeJS，不知道什么时候应用。请以GitHub数据为准。
 
-Currently I use java as my first language for large projects and use python for scripts. I'm trying to learn node.js though.
-Read my github page for more info.
+我算是东方众吧，不过并不算专注。  
+另外也是Minecraft玩家，KSP人。
 
-As for culture circles, I'm a fan of the Touhou Project.
-I've been playing Minecraft since my childhood, and it remains my favorite game.
-Besides I like almost everything about areospace. Or just anything scientific enough.
+好吧其实有意思的领域我都会研究的（
 
-Or just anything that could catch my attention XD
-
-Now just read those articles! You'll probably find something interesting.
+现在开始读文章吧！

@@ -27,7 +27,7 @@ I've explored many areas of programming, including:
 
 - competitive programming ~~(as a career)~~
 - games (mostly in java)
-- java web (using Tomcat)
+- Java web (using Tomcat)
 - general frontend design
 - physics simulation
 - tiny but useful tools
