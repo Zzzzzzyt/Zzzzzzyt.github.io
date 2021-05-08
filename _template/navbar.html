@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top topbar">
 	<a class="navbar-brand" href="<!--domain-->/">
-		<img src="<!--domain-->/assets/img/Zt_64x_wo.png" alt="Logo">
+		<img src="<!--assetsRoot-->/img/Zt_64x_wo.png" alt="Logo">
 	</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
@@ -11,6 +11,19 @@
 		<ul class="navbar-nav ml-auto topbar-nav">
 			<li class="nav-item topbar-item"><a class="nav-link" href="<!--domain-->/oi/">OI</a></li>
 			<li class="nav-item topbar-item"><a class="nav-link" href="<!--domain-->/misc/">Misc</a></li>
+		</ul>
+		<ul class="navbar-nav mr-auto topbar-nav">
+			<li class="nav-item topbar-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+					Language
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="javascript:void(0);"
+						onclick="window.lang='en';reloadLangExpand();reloadMarkdown();">English</a>
+					<a class="dropdown-item" href="javascript:void(0);"
+						onclick="window.lang='zh';reloadLangExpand();reloadMarkdown();">简体中文</a>
+				</div>
+			</li>
 		</ul>
 	</div>
 </nav>

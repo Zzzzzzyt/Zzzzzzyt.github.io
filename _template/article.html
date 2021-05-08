@@ -13,8 +13,7 @@
 		</div>
 	</div>
 	<script>
-		var srcs = JSON.parse('<!--srcs-->');
-		reloadMarkdown();
+		var srcs = new Map(Object.entries(JSON.parse('<!--srcs-->')));
 	</script>
 	<!--template:footer-->
 </body>

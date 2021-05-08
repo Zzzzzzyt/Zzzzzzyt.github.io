@@ -79,7 +79,7 @@ function reloadMathJax() {
 }
 
 function reloadAll() {
-	var postload = [reloadMathJax, reloadHighlight, reloadCopyButton, reloadTableStyle, reloadIOStyle];
+	var postload = [reloadCopyButton, reloadTableStyle, reloadIOStyle];
 	postload.forEach((fun) => {
 		try {
 			fun()
@@ -89,7 +89,7 @@ function reloadAll() {
 	});
 }
 
-function expandLang(data){
+function expandLang(data) {
 	if (data[lang] !== undefined) {
 		return data[lang];
 	} else {
@@ -99,6 +99,13 @@ function expandLang(data){
 			}
 		}
 	}
+}
+
+function reloadLangExpand() {
+	$(".lang-expand").each(function () {
+		const data = JSON.parse($(this).attr("data"));
+		$(this).html(expandLang(data));
+	});
 }
 
 function reloadMarkdown() {
@@ -111,7 +118,11 @@ function reloadMarkdown() {
 		'extensions': ['mathjax', 'video', 'audio', 'catalog', 'anchor', 'youtube', 'bilibili'],
 	});
 	content = $("#content");
-	$.get(expandLang(srcs), function (data, status) {
+	if (!srcs.has(lang)) {
+		content.html(`<p><b>Requested language "${lang}" doesn't exist!</b></p>`);
+		return;
+	}
+	$.get(srcs.get(lang), function (data, status) {
 		var text = data;
 		html = converter.makeHtml(text);
 		content.html(html);
@@ -119,15 +130,25 @@ function reloadMarkdown() {
 	});
 }
 
-const supportedLangs = new Set(["zh", "en"]);
+var supportedLangs = new Set(["zh", "en"]);
 var lang = navigator.language.split('-')[0];
-if (!supportedLangs.has(lang)) {
-	lang = "en";
-}
 
 window.addEventListener('DOMContentLoaded', (event) => {
-	$(".lang-expand").each(function () {
-		const data = JSON.parse($(this).attr("data"));
-		$(this).html(expandLang(data));
-	});
+	var langParams = new URLSearchParams(location.search);
+	if (!supportedLangs.has(lang)) {
+		lang = "en";
+	}
+	if (typeof srcs !== 'undefined') {
+		if (!srcs.has(lang)) {
+			lang = srcs.keys().next().value;
+		}
+	}
+	if (langParams.has('lang')) {
+		lang = langParams.get('lang');
+	}
+
+	reloadLangExpand();
+	if (typeof srcs !== 'undefined') {
+		reloadMarkdown();
+	}
 });

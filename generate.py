@@ -4,6 +4,7 @@ import json
 import datetime
 
 domain = 'http://127.0.0.1:5500/_local'
+assetsRoot = 'http://127.0.0.1:5500/assets'
 outputRoot = './_local'
 environment = {}
 templates = {}
@@ -44,7 +45,7 @@ def cleanup():
 def readTemplates():
     l = os.listdir('./_template/')
     for i in l:
-        templates[i[:-5]] = open('./_template/'+i).read()
+        templates[i[:-5]] = open('./_template/'+i, encoding='utf-8').read()
 
 
 def genTemplate(html, args):
@@ -182,6 +183,7 @@ def gen(path):
 
 def main():
     global domain
+    global assetsRoot
     global environment
     global outputRoot
     if len(sys.argv) > 1:
@@ -191,10 +193,13 @@ def main():
             return
         elif sys.argv[1] == 'remote':
             domain = 'https://z.ys.al'
+            assetsRoot = domain+'/assets'
         else:
             domain = sys.argv[1]
+            assetsRoot = domain+'/assets'
     environment = {
         'domain': domain,
+        'assetsRoot': assetsRoot,
         'generateTime': str(datetime.datetime.utcnow())+' UTC'
     }
     print(' Environment '.center(60, '='))

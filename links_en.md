@@ -1,5 +1,5 @@
 <!--title: Links & Credit-->
-<!--creationDate: 20200808-->
+<!--creationDate: 2020-08-08-->
 <!--priority: _-->
 
 # Social

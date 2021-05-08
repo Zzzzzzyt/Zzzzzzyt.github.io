@@ -1,56 +1,28 @@
 <html>
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, shrink-to-fit=no"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <meta name="apple-mobile-web-app-title" content="Zzzyt's blog" />
   <meta name="theme-color" content="#080800" />
   <meta name="description" content="Zzzyt's blog" />
   <meta name="keywords" content="Zzzyt blog" />
 
-  <link
-    rel="icon"
-    type="image/svg+xml"
-    href="https://z.ys.al/assets/img/favicon_512x.svg"
-    sizes="512x512"
-  />
+  <link rel="icon" type="image/svg+xml" href="https://z.ys.al/assets/img/favicon_512x.svg" sizes="512x512" />
 
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=optional"
-  />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=optional"
-  />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=optional" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=optional" />
 
-  <link
-    rel="stylesheet"
-    href="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/css/bootstrap.min.css"
-  />
-  <link
-    rel="preload"
-    href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-  />
-  <link
-    rel="preload"
-    href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/styles/monokai-sublime.min.css"
-    as="style"
-    onload="this.onload=null;this.rel='stylesheet'"
-  />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+    integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+  <link rel="preload" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
+  <link rel="preload"
+    href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/styles/monokai-sublime.min.css" as="style"
+    onload="this.onload=null;this.rel='stylesheet'" />
   <noscript>
-    <link
-      rel="stylesheet"
-      href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/styles/monokai-sublime.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/styles/monokai-sublime.min.css" />
   </noscript>
 
   <script src="https://cdn.staticfile.org/jquery/3.4.1/jquery.min.js"></script>
@@ -58,27 +30,18 @@
   <script src="https://cdn.staticfile.org/showdown/1.9.1/showdown.min.js"></script>
   <script src="https://z.ys.al/assets/js/showdown-extensions.js"></script>
   <script src="https://z.ys.al/assets/js/default.js"></script>
-  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.1.0/js/bootstrap.min.js"></script>
-  <script
-    async
-    onload="reloadHighlight()"
-    src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js"
-  ></script>
-  <script
-    async
-    onload="reloadMathJax()"
-    src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"
-  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+    crossorigin="anonymous"></script>
+  <script async onload="reloadHighlight()"
+    src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.1.1/build/highlight.min.js"></script>
+  <script async onload="reloadMathJax()"
+    src="https://cdn.staticfile.org/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 
-  <link
-    href="https://z.ys.al/assets/css/maz.css"
-    rel="stylesheet"
-    type="text/css"
-  />
+  <link href="https://z.ys.al/assets/css/maz.css" rel="stylesheet" type="text/css" />
 
   <title class='lang-expand' data='{"en": "Zzzyt&apos;s Blog: /snippets/"}'></title>
 </head>
-
 <body>
 <nav class="navbar navbar-expand-md bg-dark navbar-dark fixed-top topbar">
 	<a class="navbar-brand" href="https://z.ys.al/">
@@ -94,6 +57,19 @@
 			<li class="nav-item topbar-item"><a class="nav-link" href="https://z.ys.al/oi/">OI</a></li>
 			<li class="nav-item topbar-item"><a class="nav-link" href="https://z.ys.al/misc/">Misc</a></li>
 		</ul>
+		<ul class="navbar-nav mr-auto topbar-nav">
+			<li class="nav-item topbar-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">
+					Language
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="javascript:void(0);"
+						onclick="window.lang='en';reloadLangExpand();reloadMarkdown();">English</a>
+					<a class="dropdown-item" href="javascript:void(0);"
+						onclick="window.lang='zh';reloadLangExpand();reloadMarkdown();">简体中文</a>
+				</div>
+			</li>
+		</ul>
 	</div>
 </nav>
 	<div class="container">
@@ -101,21 +77,21 @@
 		<hr/>
     <div class="index-card card">
   <div class="card-body">
-    <span class='title-right'><i>20201214</i></span>
+    <span class='title-right'><i>2020-12-14</i></span>
     <h1><a href="https://z.ys.al/snippets/zkw-segtree.html" style="color:var(--maz-text);" class="lang-expand" data='{"en": "ZKW SegTree"}'></a></h1>
     <p style='color:var(--maz-text-gray);' class="lang-expand" data='{"en": "<del>I love ZKW</del>"}'></p>
   </div>
 </div>
 <div class="index-card card">
   <div class="card-body">
-    <span class='title-right'><i>20201214</i></span>
+    <span class='title-right'><i>2020-12-14</i></span>
     <h1><a href="https://z.ys.al/snippets/zzzyt-new-template.html" style="color:var(--maz-text);" class="lang-expand" data='{"en": "Zzzyt&apos;s New Template"}'></a></h1>
     <p style='color:var(--maz-text-gray);' class="lang-expand" data='{"en": "Much more functionality!"}'></p>
   </div>
 </div>
 <div class="index-card card">
   <div class="card-body">
-    <span class='title-right'><i>20200810</i></span>
+    <span class='title-right'><i>2020-08-10</i></span>
     <h1><a href="https://z.ys.al/snippets/zzzyt-flavored-segtree.html" style="color:var(--maz-text);" class="lang-expand" data='{"en": "Zzzyt Flavored Segment Tree"}'></a></h1>
     <p style='color:var(--maz-text-gray);' class="lang-expand" data='{"en": "A weird power-of-two implmentation of the segment tree."}'></p>
   </div>
@@ -125,7 +101,7 @@
 <center>
   <p style="color: var(--maz-text-dark);">
     Page generated on:
-    2021-05-07 08:17:04.829229 UTC
+    2021-05-08 15:01:35.302437 UTC
     <br />
     Generated by: ZOSSE (Zzzyt's Own Static Site Engine) =D
   </p>

@@ -1,7 +1,7 @@
-<!--title:欢迎欢迎!-->
+<!--title: 欢迎欢迎!-->
 <!--description: README-->
-<!--creationDate: 20210507-->
-<!--priority:__-->
+<!--creationDate: 2021-05-07-->
+<!--priority: __-->
 
 # 关于本站
 
@@ -30,7 +30,7 @@
 - 某些工具
 - 一点点机器学习
 
-当前我以Java为第一语言，用于大型项目。Python仅作脚本只用。现在正在学NodeJS，不知道什么时候应用。请以GitHub数据为准。
+当前我以Java为第一语言，用于大型项目。Python仅作脚本之用。现在正在学NodeJS，不知道什么时候应用。请以GitHub数据为准。
 
 我算是东方众吧，不过并不算专注。  
 另外也是Minecraft玩家，KSP人。
