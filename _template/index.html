@@ -1,8 +1,9 @@
 <html>
     <!--template:head-->
     <body>
-        <!--template:navbar-->
-        <div class="container"></div>
+        <div class="container">
+            <!--template:navbar-->
+        </div>
         <script>
             var args = JSON.parse(atob("<!--args-->"));
             var reloadIndex = function () {
@@ -31,7 +32,7 @@
 							</div>
 							</div>`;
                     }
-                    $(".container").html(html);
+                    $(".container").append(html);
                 });
             };
             reloadIndex();
