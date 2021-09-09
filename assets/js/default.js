@@ -93,7 +93,7 @@ function setLang(lang) {
     window.lang = lang;
     reloadLangExpand();
     reloadMarkdown();
-    if (typeof reloadIndex !== 'undefined') {
+    if (typeof reloadIndex !== "undefined") {
         reloadIndex();
     }
 }
@@ -136,6 +136,12 @@ function reloadMarkdown() {
             html = converter.makeHtml(data);
             content.html(html);
             reloadAll();
+            try {
+                reloadMathJax();
+            } catch (error) {}
+            try {
+                reloadHighlight();
+            } catch (error) {}
         });
     }
 }
