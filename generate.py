@@ -64,7 +64,7 @@ def readTemplates():
 
 
 def genTemplate(html, args={}):
-    args["args"] = base64Encode(miniJSON(args))
+    args['args'] = base64Encode(miniJSON(args))
     for inf in range(100):
         flag = True
         for i in templates:
@@ -226,7 +226,6 @@ def main():
     print('outputRoot:', outputRoot)
     print(environment)
     print(''.center(60, '='))
-    # cleanup()
     readTemplates()
     articles = gen('/')
     safeWrite(outputRoot+'/index.json', json.dumps(articles, separators=(',', ':')))
