@@ -2,12 +2,15 @@ import os
 import sys
 import json
 import datetime
+import hashlib
+import base64
 
 domain = 'http://127.0.0.1:5500/_local'
 assetsRoot = 'http://127.0.0.1:5500/assets'
 outputRoot = './_local'
 environment = {}
 templates = {}
+oldIndex = {}
 
 
 def changeExtension(filename, ext):
@@ -22,8 +25,20 @@ def safeWrite(path, data):
     open(path, 'w', encoding='utf-8').write(data)
 
 
+def htmlEncode(s):
+    return s.replace('&', '&amp;').replace("'", '&apos;').replace('"', '&#39;').replace('<', '&lt;').replace('>', '&gt;').replace(' ', '&nbsp;')
+
+
+def base64Encode(s):
+    return base64.b64encode(s.encode('utf-8')).decode('utf-8')
+
+
+def miniJSON(obj):
+    return json.dumps(obj, separators=(',', ':'))
+
+
 def safeJSON(obj):
-    return json.dumps(obj).replace("'", "&apos;")
+    return htmlEncode(miniJSON(obj))
 
 
 def cleanup():
@@ -48,7 +63,8 @@ def readTemplates():
         templates[i[:-5]] = open('./_template/'+i, encoding='utf-8').read()
 
 
-def genTemplate(html, args):
+def genTemplate(html, args={}):
+    args["args"] = base64Encode(miniJSON(args))
     for inf in range(100):
         flag = True
         for i in templates:
@@ -71,91 +87,86 @@ def genTemplate(html, args):
 def parseArticle(path, filename, lang):
     lines = open('.'+path+filename, encoding='utf-8').readlines()
     info = {
+        'path': path+filename,
         'title': filename,
         'description': '',
         'creationDate': None,
         'priority': None,
         'lang': lang
     }
-    for l in lines:
-        for i in info:
-            if l.startswith('<!--{}:'.format(i)):
-                pos = l.find(':')
-                info[i] = l.strip()[pos+1:-3].strip()
+    index = -1
+    for i in range(len(lines)):
+        if lines[i].startswith('<!--info:'):
+            index = i
+    if index != -1:
+        index += 1
+        tmp = '{'
+        while index < len(lines):
+            s = lines[index]
+            if s.startswith('-->'):
+                break
+            tmp += s[:-1]+','
+            index += 1
+        tmp = tmp[:-1] + '}'
+        info.update(json.loads(tmp))
     if info['priority'] == None:
         info['priority'] = info['creationDate']
-    return path+filename, info
+    return info
 
 
 def genArticle(name, info):
     print('generate: article', name)
+    flag = True
+    if name in oldIndex:
+        for lang in info['versions']:
+            if not(lang in oldIndex[name]['versions']
+                   and oldIndex[name]['versions'][lang]['hash'] == info['versions'][lang]['hash']):
+                flag = False
+    filename = outputRoot+name+'.html'
+    if flag and os.path.exists(filename):
+        print('skipped')
+        return
     args = environment.copy()
+    titles = {}
+    srcs = {}
+    for i in info['versions']:
+        titles[i] = htmlEncode(info['versions'][i]['title'])
+        srcs[i] = info['versions'][i]['path']
     args.update({
-        'creationDate': info['creationDate'],
-        'titles': safeJSON(info['titles']),
-        'srcs': safeJSON(info['srcs'])
+        'titles': base64Encode(miniJSON(titles)),
+        'srcs': base64Encode(miniJSON(srcs)),
     })
     html = genTemplate('<!--template:article-->', args)
-    safeWrite(outputRoot+name+'.html', html)
+    safeWrite(filename, html)
 
 
 def aggregateArticle(versions):
     ret = {
         'creationDate': '99999999',
-        'priority': ''
+        'priority': '',
+        'versions': {}
     }
-    srcs = {}
-    titles = {}
-    descriptions = {}
-    for path, info in versions:
+    for info in versions:
         ret['creationDate'] = min(ret['creationDate'], info['creationDate'])
         ret['priority'] = max(ret['priority'], info['priority'])
-        srcs[info['lang']] = path
-        titles[info['lang']] = info['title']
-        descriptions[info['lang']] = info['description']
-    ret.update({
-        'srcs': srcs,
-        'titles': titles,
-        'descriptions': descriptions
-    })
+        ret['versions'][info['lang']] = {
+            'title': info['title'],
+            'description': info['description'],
+            'path': info['path'],
+            'hash': hashlib.sha256(open('.'+info['path'], 'rb').read()).hexdigest(),
+        }
     return ret
-
-
-def genIndex(path, articles):
-    print('generate: index', path)
-    index = ''
-    articles.sort(key=lambda a: a[1]['priority'], reverse=True)
-    for a in articles:
-        args = environment.copy()
-        args.update({
-            'path': a[0]+'.html',
-            'titles': safeJSON(a[1]['titles']),
-            'descriptions': safeJSON(a[1]['descriptions']),
-            'creationDate': a[1]['creationDate']
-        })
-        index += genTemplate('<!--template:indexArticle-->', args)
-    args = environment.copy()
-    path2 = path
-    if path2 == '/':
-        path2 = "Zzzyt's Blog"
-    args.update({
-        'titles': safeJSON({"en": "Zzzyt's Blog: "+path}),
-        'dir': path2,
-        'generateIndex': index
-    })
-    html = genTemplate('<!--template:index-->', args)
-    safeWrite(outputRoot+path+'index.html', html)
 
 
 def gen(path):
     l = os.listdir('.'+path)
-    print('gen: at path:', path, l)
+    # print('gen: at path:', path, l)
     dirs = []
     articles = {}
     for filename in l:
         if filename.startswith('_'):
             continue
-        if filename.startswith('assets'):
+        if filename == 'assets':
             continue
         if filename.startswith('.'):
             continue
@@ -170,15 +181,21 @@ def gen(path):
                 if not name in articles:
                     articles[name] = []
                 articles[name].append(parseArticle(path, filename, lang))
+    # print(articles)
     for name in articles:
         articles[name] = aggregateArticle(articles[name])
         genArticle(name, articles[name])
-    articleList = list(articles.items())
     for d in dirs:
-        articleList.extend(gen(path+d[1]+'/'))
-    print(articleList)
-    genIndex(path, articleList)
-    return articleList
+        articles.update(gen(path+d[1]+'/'))
+    return articles
+
+
+def genIndex(filename, titles, filter):
+    args = environment.copy()
+    for i in titles:
+        titles[i] = htmlEncode(titles[i])
+    args.update({'filterCode': filter, 'titles': base64Encode(miniJSON(titles))})
+    safeWrite(outputRoot+filename, genTemplate('<!--template:index-->', args))
 
 
 def main():
@@ -186,13 +203,14 @@ def main():
     global assetsRoot
     global environment
     global outputRoot
+    global oldIndex
     if len(sys.argv) > 1:
         outputRoot = '.'
         if sys.argv[1] == 'cleanup':
             cleanup()
             return
         elif sys.argv[1] == 'remote':
-            domain = 'https://z.ys.al'
+            domain = 'https://Zzzzzzyt.github.io'
             assetsRoot = domain+'/assets'
         else:
             domain = sys.argv[1]
@@ -202,13 +220,19 @@ def main():
         'assetsRoot': assetsRoot,
         'generateTime': str(datetime.datetime.utcnow())+' UTC'
     }
+    if os.path.exists(outputRoot+'/index.json'):
+        oldIndex = json.load(open(outputRoot+'/index.json'))
     print(' Environment '.center(60, '='))
     print('outputRoot:', outputRoot)
     print(environment)
     print(''.center(60, '='))
     # cleanup()
     readTemplates()
-    gen('/')
+    articles = gen('/')
+    safeWrite(outputRoot+'/index.json', json.dumps(articles, separators=(',', ':')))
+    genIndex('/index.html', {'en': "Zzzyt's Blog", "zh": "YPZJS"}, '')
+    genIndex('/misc.html', {'en': "Zzzyt's Blog"}, 'if(!i[0].startsWith("/misc"))continue;')
+    genIndex('/oi.html', {'en': "Zzzyt's Blog"}, 'if(!i[0].startsWith("/oi"))continue;')
 
 
 if __name__ == '__main__':

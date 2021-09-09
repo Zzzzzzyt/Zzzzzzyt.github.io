@@ -1,6 +1,8 @@
-<!--title: Links & Credit-->
-<!--creationDate: 2020-08-08-->
-<!--priority: _-->
+<!--info:
+"title":"Links & Credit"
+"creationDate":"2020-08-08"
+"priority":"_"
+-->
 
 # Social
 

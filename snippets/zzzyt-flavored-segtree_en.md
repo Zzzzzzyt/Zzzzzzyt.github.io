@@ -1,6 +1,8 @@
-<!--title: Zzzyt Flavored Segment Tree-->
-<!--description: A weird power-of-two implmentation of the segment tree.-->
-<!--creationDate: 2020-08-10-->
+<!--info:
+"title":"Zzzyt Flavored Segment Tree"
+"description":"A weird power-of-two implmentation of the segment tree."
+"creationDate":"2020-08-10"
+-->
 
 # Code
 

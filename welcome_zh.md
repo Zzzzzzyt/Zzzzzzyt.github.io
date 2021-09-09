@@ -1,7 +1,9 @@
-<!--title: 欢迎欢迎!-->
-<!--description: README-->
-<!--creationDate: 2021-05-07-->
-<!--priority: __-->
+<!--info:
+"title":"欢迎欢迎!"
+"description":"README"
+"creationDate":"2020-05-07"
+"priority":"__"
+-->
 
 # 关于本站
 

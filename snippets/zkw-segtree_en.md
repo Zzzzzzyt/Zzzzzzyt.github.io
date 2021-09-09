@@ -1,6 +1,8 @@
-<!--title: ZKW SegTree-->
-<!--description: <del>I love ZKW</del>-->
-<!--creationDate: 2020-12-14-->
+<!--info:
+"title":"ZKW SegTree"
+"description":"<del>I love ZKW</del>"
+"creationDate":"2020-12-14"
+-->
 
 # Code
 

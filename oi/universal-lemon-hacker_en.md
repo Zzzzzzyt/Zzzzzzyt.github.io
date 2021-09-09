@@ -1,6 +1,8 @@
-<!--title:Universal Lemon Hacker-->
-<!--description: Make you AK all the time!!-->
-<!--creationDate: 2020-08-08-->
+<!--info:
+"title":"Universal Lemon Hacker"
+"description":"Make you AK all the time!!"
+"creationDate":"2020-08-08"
+-->
 
 # Usage
 
@@ -31,7 +33,7 @@ int main(int args,char** argv)
     string path=argv[0];
     string probname;
     int testid;
-    
+
     int i,j;
     for(i=path.size()-1;i>=0;i--){
         if(path[i]=='\\'){
@@ -46,18 +48,18 @@ int main(int args,char** argv)
             break;
         }
     }
-    
+
     freopen((probname+".out").c_str(),"w",stdout);
-    
+
     char buf[1005]={};
-    sprintf(buf, "./../../data/%s/%s%d.out", probname.c_str(),probname.c_str(),testid); 
+    sprintf(buf, "./../../data/%s/%s%d.out", probname.c_str(),probname.c_str(),testid);
     freopen(buf,"r",stdin);
-    
+
     int c;
     while((c=getchar())!=EOF){
         putchar(c);
     }
-    
+
     return 0;
 }
 ```

@@ -1,7 +1,9 @@
-<!--title: Welcome to the Blog!-->
-<!--description: README-->
-<!--creationDate: 2020-12-15-->
-<!--priority: __-->
+<!--info:
+"title":"Welcome to the Blog!"
+"description":"README"
+"creationDate":"2020-12-15"
+"priority":"__"
+-->
 
 # About this site
 

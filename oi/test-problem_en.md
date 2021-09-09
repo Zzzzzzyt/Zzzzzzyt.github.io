@@ -1,6 +1,8 @@
-<!--title: HHSOJ Test Problem-->
-<!--description: The statement for hhsoj test problem.-->
-<!--creationDate: 2020-08-07-->
+<!--info:
+"title":"HHSOJ Test Problem"
+"description":"The statement for hhsoj test problem."
+"creationDate":"2020-08-07"
+-->
 
 [TOC]
 

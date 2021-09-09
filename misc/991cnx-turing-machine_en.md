@@ -1,6 +1,7 @@
-<!--title:Turing Machine for CASIO fx-991CNX-->
-<!--description: -->
-<!--creationDate: 2020-12-15-->
+<!--info:
+"title":"Turing Machine for CASIO fx-991CNX"
+"creationDate":"2020-12-15"
+-->
 
 # Input
 
