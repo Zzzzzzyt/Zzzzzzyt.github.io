@@ -1,0 +1,19 @@
+<html>
+    <!--template:head-->
+
+    <body>
+        <div class="container">
+            <!--template:navbar-->
+            <span class="title-right"
+                ><i> <!--creationDate--> </i><br /><a href="javascript:history.back(0);">Back</a></span
+            >
+            <h1><b class="lang-expand" data="<!--titles-->"></b></h1>
+            <hr />
+            <div id="content"></div>
+        </div>
+        <script>
+            var srcs = new Map(Object.entries(JSON.parse(atob("<!--srcs-->"))));
+        </script>
+        <!--template:footer-->
+    </body>
+</html>
