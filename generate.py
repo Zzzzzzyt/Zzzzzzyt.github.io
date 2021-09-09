@@ -230,9 +230,9 @@ def main():
     readTemplates()
     articles = gen('/')
     safeWrite(outputRoot+'/index.json', json.dumps(articles, separators=(',', ':')))
-    genIndex('/index.html', {'en': "Zzzyt's Blog", "zh": "YPZJS"}, '')
-    genIndex('/misc.html', {'en': "Zzzyt's Blog"}, 'if(!i[0].startsWith("/misc"))continue;')
-    genIndex('/oi.html', {'en': "Zzzyt's Blog"}, 'if(!i[0].startsWith("/oi"))continue;')
+    genIndex('/index.html', {'en': "Zzzyt's Blog"}, '')
+    genIndex('/misc.html', {'en': "Zzzyt's Blog: Misc"}, 'if(!i[0].startsWith("/misc"))continue;')
+    genIndex('/oi.html', {'en': "Zzzyt's Blog: OI"}, 'if(!i[0].startsWith("/oi"))continue;')
 
 
 if __name__ == '__main__':
