@@ -156,7 +156,7 @@
         replace: function (match) {
           needCat = true;
 
-          return '';
+          return '[[[TOC]]]]]';
         }
       },
 
@@ -180,38 +180,38 @@
       {
         type: 'output',
         filter: function (text, globals_converter, options) {
-          if (catalogues.length <= 0) return text;
-
-          var catDiv = '<div class="cat" id="toc_catalog">';
-          var lastLevel = 0;
-          var levelCount = 0;
-
-          for (var i = 0; i < catalogues.length; i++) {
-            var cat = catalogues[i];
-
-            if (cat.level < lastLevel) {
-              var count = lastLevel - cat.level;
-              if (levelCount <= count) {
-                count = levelCount - 1;
+          var catDiv = '';
+          if (catalogues.length > 0) {
+            var catDiv = '<div class="cat" id="toc_catalog">';
+            var lastLevel = 0;
+            var levelCount = 0;
+  
+            for (var i = 0; i < catalogues.length; i++) {
+              var cat = catalogues[i];
+  
+              if (cat.level < lastLevel) {
+                var count = lastLevel - cat.level;
+                if (levelCount <= count) {
+                  count = levelCount - 1;
+                }
+                for (var l = 0; l < count; l++) {
+                  catDiv += ('</ul>');
+                }
+                levelCount -= count;
+              } else if (lastLevel < cat.level) {
+                catDiv += ('<ul>');
+                levelCount ++;
               }
-              for (var l = 0; l < count; l++) {
-                catDiv += ('</ul>');
-              }
-              levelCount -= count;
-            } else if (lastLevel < cat.level) {
-              catDiv += ('<ul>');
-              levelCount ++;
+              catDiv += ('<li><a href="#' + cat.id + '">' + cat.title + '</a></li>');
+  
+              lastLevel = cat.level;
             }
-            catDiv += ('<li><a href="#' + cat.id + '">' + cat.title + '</a></li>');
-
-            lastLevel = cat.level;
+  
+            catDiv += '</ul></div>';
+  
+            needCat = false;
+            catalogues = [];
           }
-
-          catDiv += '</ul></div>';
-
-          needCat = false;
-          catalogues = [];
-
           return text.replace(/\[\[\[TOC\]\]\]\]\]/g, catDiv);
         }
       },
