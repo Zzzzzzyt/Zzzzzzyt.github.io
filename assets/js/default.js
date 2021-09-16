@@ -133,8 +133,11 @@ function reloadMarkdown() {
             return;
         }
         $.get(srcs.get(lang), function (data, status) {
-            html = converter.makeHtml(data);
+            html = converter.makeHtml("[TOC]\n" + data);
             content.html(html);
+            toc = content.find("#toc_catalog");
+            $("#sidebar").append(toc.clone());
+            toc.remove();
             reloadAll();
             try {
                 reloadMathJax();
