@@ -156,7 +156,7 @@
         replace: function (match) {
           needCat = true;
 
-          return '[[[TOC]]]]]';
+          return '';
         }
       },
 
