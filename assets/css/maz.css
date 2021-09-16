@@ -230,6 +230,10 @@ span[class~="title-right"] {
     display: none;
 }
 
+#sidebar:empty {
+    display: none;
+}
+
 #toc_catalog {
     position: sticky;
     position: -webkit-sticky;
