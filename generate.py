@@ -116,16 +116,16 @@ def parseArticle(path, filename, lang):
 
 def genArticle(name, info):
     print('generate: article', name)
-    flag = True
-    if name in oldIndex:
-        for lang in info['versions']:
-            if not(lang in oldIndex[name]['versions']
-                   and oldIndex[name]['versions'][lang]['hash'] == info['versions'][lang]['hash']):
-                flag = False
     filename = outputRoot+name+'.html'
-    if flag and os.path.exists(filename):
-        print('skipped')
-        return
+    # flag = True
+    # if name in oldIndex:
+    #     for lang in info['versions']:
+    #         if not(lang in oldIndex[name]['versions']
+    #                and oldIndex[name]['versions'][lang]['hash'] == info['versions'][lang]['hash']):
+    #             flag = False
+    # if flag and os.path.exists(filename):
+    #     print('skipped')
+    #     return
     args = environment.copy()
     titles = {}
     srcs = {}
@@ -133,6 +133,7 @@ def genArticle(name, info):
         titles[i] = htmlEncode(info['versions'][i]['title'])
         srcs[i] = info['versions'][i]['path']
     args.update({
+        'creationDate': info['creationDate'],
         'titles': base64Encode(miniJSON(titles)),
         'srcs': base64Encode(miniJSON(srcs)),
     })

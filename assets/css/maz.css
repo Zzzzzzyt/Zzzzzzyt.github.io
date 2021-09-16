@@ -15,12 +15,17 @@ body {
     background: var(--maz-bg);
 }
 
-.container {
+#container {
     min-height: calc(100% - 150px);
+    min-width: 400px;
+    max-width: 1500px;
+    width: calc(100% - 100px);
     border-radius: 10px;
     padding: 15px;
     margin-top: 60px;
     margin-bottom: 20px;
+    margin-left: auto;
+    margin-right: auto;
     background: var(--maz-bg);
 }
 
@@ -221,6 +226,29 @@ span[class~="title-right"] {
     clear: both;
 }
 
+#sidebar {
+    display: none;
+}
+
+#toc_catalog {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 70px;
+}
+
+#content {
+    flex: auto;
+}
+
+@media (min-width: 1200px) {
+    #sidebar {
+        display: block;
+        min-width: 300px;
+        max-width: 20%;
+        margin-right: 30px;
+    }
+}
+
 #content h1,
 #content h2,
 #content h3,
@@ -348,14 +376,7 @@ span[class~="title-right"] {
 
 /* Copy button */
 
-@media (min-width: 576px) {
-    .copy-btn-wrapper {
-        display: block !important;
-    }
-}
-
 .copy-btn-wrapper {
-    display: none;
     margin: 0;
     position: relative;
 }

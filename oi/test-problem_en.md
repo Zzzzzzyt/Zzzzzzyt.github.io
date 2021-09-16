@@ -4,8 +4,6 @@
 "creationDate":"2020-08-07"
 -->
 
-[TOC]
-
 ### Statement
 
 I think we should use `h3` tag for titles.
