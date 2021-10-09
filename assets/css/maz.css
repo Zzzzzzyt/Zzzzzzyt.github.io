@@ -275,6 +275,17 @@ span[class~="title-right"] {
     margin-left: -2.5em;
 }
 
+#content img {
+    max-width: 100%;
+}
+
+.img-caption {
+    padding: 0.5em;
+    text-align: center;
+    font-style: italic;
+    color: var(--maz-text-gray);
+}
+
 /* topbar */
 
 .topbar-item a {

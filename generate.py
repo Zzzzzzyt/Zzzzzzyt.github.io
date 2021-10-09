@@ -4,6 +4,7 @@ import json
 import datetime
 import hashlib
 import base64
+import shutil
 
 domain = 'http://127.0.0.1:5500/_local'
 assetsRoot = 'http://127.0.0.1:5500/assets'
@@ -228,6 +229,15 @@ def main():
     print(environment)
     print(''.center(60, '='))
     readTemplates()
+    if outputRoot != '.':
+        for i in os.listdir('.'):
+            if not i.startswith('_') and not i.startswith('.') and i != 'assets' and i != 'generate.py':
+                dst = outputRoot+'/'+i
+                print('copy: ./'+i+' to '+dst)
+                if os.path.isdir(i):
+                    shutil.copytree(i, dst, dirs_exist_ok=True)
+                else:
+                    shutil.copyfile(i, dst)
     articles = gen('/')
     safeWrite(outputRoot+'/index.json', json.dumps(articles, separators=(',', ':')))
     genIndex('/index.html', {'en': "Zzzyt's Blog"}, '')
