@@ -3,6 +3,8 @@
 "creationDate":"2020-12-15"
 -->
 
+[TOC]
+
 # Input
 
 The machine has 3 states and a tape length of 32 bits.  

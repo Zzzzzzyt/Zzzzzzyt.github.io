@@ -133,11 +133,18 @@ function reloadMarkdown() {
             return;
         }
         $.get(srcs.get(lang), function (data, status) {
-            html = converter.makeHtml("[TOC]\n" + data);
+            html = converter.makeHtml(data);
             content.html(html);
             toc = content.find("#toc_catalog");
             $("#sidebar").append(toc.clone());
             toc.remove();
+            $("#content img").each((i, img) => {
+                img = $(img);
+                alt = img.attr("alt");
+                if (alt != undefined) {
+                    img.after(`<p class="img-caption">${alt}</p>`);
+                }
+            });
             reloadAll();
             try {
                 reloadMathJax();
