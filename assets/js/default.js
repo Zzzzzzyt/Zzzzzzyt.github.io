@@ -140,6 +140,7 @@ function reloadMarkdown() {
             toc.remove();
             $("#content img").each((i, img) => {
                 img = $(img);
+                img.wrap('<div class="img-wrapper"></figure>');
                 alt = img.attr("alt");
                 if (alt != undefined) {
                     img.after(`<p class="img-caption">${alt}</p>`);

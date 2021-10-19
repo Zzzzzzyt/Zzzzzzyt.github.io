@@ -277,9 +277,14 @@ span[class~="title-right"] {
 
 #content img {
     max-width: 100%;
+    max-height: 600px;
 }
 
-.img-caption {
+#content .img-wrapper {
+    width: fit-content;
+}
+
+#content .img-caption {
     padding: 0.5em;
     text-align: center;
     font-style: italic;
